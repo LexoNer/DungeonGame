@@ -11,6 +11,7 @@ public class RoomGenerator : MonoBehaviour
 
     //Tiles information
     public int[,] matrizTiles;
+    public GameObject[,] tiles;
     int x = 8;
     int y;
 
@@ -28,6 +29,7 @@ public class RoomGenerator : MonoBehaviour
             this.gameObject.SetActive(false);
         }
         matrizTiles = new int[x, y];
+        tiles = new GameObject[x, y];
         GenerateTerrain();
         GenerateTales();
     }
@@ -37,7 +39,6 @@ public class RoomGenerator : MonoBehaviour
 
         for (int f = 0; f < matrizTiles.GetLength(0); f++)
         {
-            print(matrizTiles);
             for (int c = 0; c < matrizTiles.GetLength(1); c++)
             {
                 int n = Random.Range(0, 10);
@@ -64,6 +65,7 @@ public class RoomGenerator : MonoBehaviour
                 GameObject instantiatedTile = Instantiate(tile, new Vector2(c + spacex, f + spacey), Quaternion.identity);
                 instantiatedTile.transform.parent = transform;
                 spacex += 0.1f;
+                tiles[c,f] = instantiatedTile;
 
                 if (matrizTiles[c,f] == 1)
                 {
